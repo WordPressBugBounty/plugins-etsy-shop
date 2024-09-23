@@ -1,0 +1,1 @@
+# plugins-etsy-shop
