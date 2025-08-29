@@ -8,7 +8,7 @@ Plugin URI: http://wordpress.org/extend/plugins/etsy-shop/
 Description: Inserts Etsy products in page or post using shortcode method.
 Author: Frédéric Sheedy
 Text Domain: etsy-shop
-Version: 3.0.6
+Version: 3.0.7
 */
 
 /*
@@ -35,7 +35,7 @@ Version: 3.0.6
  * TODO: Add MCE Button / block
  */
 
-define( 'ETSY_SHOP_VERSION',  '3.0.6' );
+define( 'ETSY_SHOP_VERSION',  '3.0.7' );
 define( 'ETSY_SHOP_CACHE_PREFIX', 'etsy_shop_cache_' );
 
 // plugin activation
@@ -656,7 +656,7 @@ function etsy_shop_options_page() {
                 <span class="dashicons dashicons-arrow-down-alt2" style="color:green;"></span>
             </a>
             <div id="etsy-shop-quick-start-content" <?php if (!$quick_start_update) { ?>style="display:none;"<?php } ?>>
-                    <form name="etsy_shop_quickstart_form" method="post" action="<?php echo wp_filter_nohtml_kses($_SERVER['REQUEST_URI']); ?>">
+                    <form name="etsy_shop_quickstart_form" method="post" action="<?php echo esc_attr($_SERVER['REQUEST_URI']); ?>">
                     <div class="etsty-shop-quickstart-step"><?php _e( 'STEP 1', 'etsy-shop' ); ?></div><span style="font-weight: bold;"><?php _e( 'Is your Etsy API Key is valid?', 'etsy-shop' ); ?></span>
                     <?php if ( !is_wp_error( etsy_shop_testAPIKey()) ) { $etsy_shop_quickstart_step = 2; ?>
                         <span id="etsy_shop_api_key_status_qs" style="color:green;font-weight:bold;"><?php _e( 'OK, go to step 2', 'etsy-shop' ); ?></span>
@@ -690,7 +690,7 @@ function etsy_shop_options_page() {
                 <?php } ?>
             </div>
         </div>
-        <form name="etsy_shop_options_form" method="post" action="<?php echo wp_filter_nohtml_kses($_SERVER['REQUEST_URI']); ?>">
+        <form name="etsy_shop_options_form" method="post" action="<?php echo esc_attr($_SERVER['REQUEST_URI']); ?>">
             <table class="form-table">
                 <tr valign="top">
                     <th scope="row">
