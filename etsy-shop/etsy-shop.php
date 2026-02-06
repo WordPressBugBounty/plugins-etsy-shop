@@ -8,11 +8,11 @@ Plugin URI: http://wordpress.org/extend/plugins/etsy-shop/
 Description: Inserts Etsy products in page or post using shortcode method.
 Author: Frédéric Sheedy
 Text Domain: etsy-shop
-Version: 3.0.7
+Version: 3.1
 */
 
 /*
- * Copyright 2011-2023  Frédéric Sheedy
+ * Copyright 2011-2026  Frédéric Sheedy
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License, version 2, as
@@ -35,7 +35,7 @@ Version: 3.0.7
  * TODO: Add MCE Button / block
  */
 
-define( 'ETSY_SHOP_VERSION',  '3.0.7' );
+define( 'ETSY_SHOP_VERSION',  '3.1' );
 define( 'ETSY_SHOP_CACHE_PREFIX', 'etsy_shop_cache_' );
 
 // plugin activation
@@ -515,7 +515,7 @@ function etsy_shop_options_page() {
 
         // did the user enter an API Key?
         if ( isset( $_POST['etsy_shop_api_key'] ) ) {
-            $etsy_shop_api_key = wp_filter_nohtml_kses( preg_replace( '/[^A-Za-z0-9]/', '', $_POST['etsy_shop_api_key'] ) );
+            $etsy_shop_api_key = wp_filter_nohtml_kses( preg_replace( '/[^A-Za-z0-9:]/', '', $_POST['etsy_shop_api_key'] ) );
             update_option( 'etsy_shop_api_key', $etsy_shop_api_key );
 
             // and remember to note the update to user
@@ -704,7 +704,8 @@ function etsy_shop_options_page() {
                                         <span id="etsy_shop_api_key_status" style="color:red;font-weight:bold;"><?php _e( 'You API Key is invalid', 'etsy-shop' ); ?></span>
                                     <?php } ?>
                                     <p class="description">
-                                    <?php echo sprintf( __('You may get an Etsy API Key by <a href="%1$s">Creating a new Etsy App</a>', 'etsy-shop' ), 'http://www.etsy.com/developers/register' ); ?>
+                                    <?php echo _e( 'Use the new format: <b>keystring:secret</b>. Etsy require all API requests to include a shared secret starting on January 18, 2026', 'etsy-shop' ); ?>
+                                    <br><?php echo sprintf( __('You may get an Etsy API Key by <a href="%1$s">Creating a new Etsy App</a>', 'etsy-shop' ), 'http://www.etsy.com/developers/register' ); ?>
                                     <br><?php if ( is_wp_error( etsy_shop_testAPIKey()) ) { echo '<span id="etsy_shop_api_key_status" style="color:red;font-weight:bold;">'; } ?><?php echo sprintf( __('Make sure that your API Key is approved, not in Pending approval status. Go to <a href="%1$s">Manage your apps</a>', 'etsy-shop' ), 'https://www.etsy.com/developers/your-apps' ); ?><?php if ( is_wp_error( etsy_shop_testAPIKey()) ) { echo '</span>'; } ?></p>
                     </td>
                 </tr>
